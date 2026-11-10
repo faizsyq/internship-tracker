@@ -1,0 +1,260 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ---------- Tokens ---------- */
+:root {
+  color-scheme: light;
+  --bg: #f5f3ee;
+  --surface: #fffefb;
+  --surface-2: #edeae3;
+  --line: #e2ddd3;
+  --line-strong: #cbc4b6;
+  --ink: #1b1a17;
+  --ink-2: #47433c;
+  --muted: #6b655b;
+  --inverse: #f5f3ee;
+  --focus: #2f56c8;
+
+  --danger: #b3261e;
+  --danger-soft: #f7e1dd;
+  --warn: #9a5b00;
+  --warn-edge: #d89222;
+  --warn-soft: #f8ecd3;
+
+  --st-wishlist: #8c8576;
+  --st-wishlist-bg: #ebe8e1;
+  --st-wishlist-fg: #4f4a41;
+  --st-applied: #2f56c8;
+  --st-applied-bg: #e5ebfa;
+  --st-applied-fg: #23439f;
+  --st-interview: #c08419;
+  --st-interview-bg: #f7ecd4;
+  --st-interview-fg: #7d560c;
+  --st-offer: #2e7d50;
+  --st-offer-bg: #e0efe5;
+  --st-offer-fg: #1e5e3d;
+  --st-rejected: #b4472f;
+  --st-rejected-bg: #f5e2dc;
+  --st-rejected-fg: #8c3421;
+  --st-ghosted: #66717e;
+  --st-ghosted-bg: #e5e8eb;
+  --st-ghosted-fg: #45505b;
+
+  --shadow-pop: 0 1px 2px rgb(27 26 23 / 0.06), 0 8px 24px -6px rgb(27 26 23 / 0.16);
+  --shadow-dialog: 0 2px 6px rgb(27 26 23 / 0.08), 0 24px 60px -12px rgb(27 26 23 / 0.28);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #151412;
+  --surface: #1d1c19;
+  --surface-2: #252320;
+  --line: #2f2c28;
+  --line-strong: #45413a;
+  --ink: #eeebe4;
+  --ink-2: #cbc6bb;
+  --muted: #9d978c;
+  --inverse: #151412;
+  --focus: #87a5f2;
+
+  --danger: #f08a7e;
+  --danger-soft: #3a1d19;
+  --warn: #e6b05a;
+  --warn-edge: #d89a35;
+  --warn-soft: #352a14;
+
+  --st-wishlist: #a39c8d;
+  --st-wishlist-bg: #2a2824;
+  --st-wishlist-fg: #d0cabe;
+  --st-applied: #7d9df0;
+  --st-applied-bg: #1d2541;
+  --st-applied-fg: #adc1f6;
+  --st-interview: #e0a542;
+  --st-interview-bg: #33280f;
+  --st-interview-fg: #ecc47d;
+  --st-offer: #5fbc86;
+  --st-offer-bg: #15301f;
+  --st-offer-fg: #92d4ad;
+  --st-rejected: #e27d65;
+  --st-rejected-bg: #3a1e18;
+  --st-rejected-fg: #f0a594;
+  --st-ghosted: #909cab;
+  --st-ghosted-bg: #252a30;
+  --st-ghosted-fg: #b8c2cd;
+
+  --shadow-pop: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 28px -6px rgb(0 0 0 / 0.55);
+  --shadow-dialog: 0 2px 6px rgb(0 0 0 / 0.4), 0 28px 70px -12px rgb(0 0 0 / 0.7);
+}
+
+@theme inline {
+  --font-sans: 'Onest Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-inverse: var(--inverse);
+  --color-focus: var(--focus);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --ease-out-strong: var(--ease-out);
+}
+
+/* ---------- Base ---------- */
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  font-feature-settings: 'ss01';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  caret-color: var(--focus);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--focus) 24%, transparent);
+  color: var(--ink);
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+  letter-spacing: -0.015em;
+}
+
+@layer components {
+/* Pressable things answer the press. */
+.press {
+  transition:
+    transform 140ms var(--ease-out),
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    opacity 150ms ease;
+}
+.press:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Form fields */
+.field {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px; /* stops iOS zoom on focus */
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+.field::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.field:hover {
+  border-color: color-mix(in srgb, var(--ink) 35%, var(--line-strong));
+}
+.field:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent);
+}
+.field[aria-invalid='true'] {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 18%, transparent);
+}
+textarea.field {
+  padding: 10px 12px;
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.5;
+}
+input[type='date'].field {
+  appearance: none;
+  -webkit-appearance: none;
+}
+input[type='date'].field::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+  cursor: pointer;
+}
+:root[data-theme='dark'] input[type='date'].field::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+select.field {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%236b655b' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+input[type='number'].field::-webkit-inner-spin-button,
+input[type='number'].field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'].field {
+  -moz-appearance: textfield;
+}
+
+}
+
+/* Hover-only effects stay off touch screens. */
+@media (hover: hover) and (pointer: fine) {
+  .hover-lift:hover {
+    border-color: var(--line-strong);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press:active:not(:disabled) {
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
